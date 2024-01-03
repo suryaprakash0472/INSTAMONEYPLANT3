@@ -1,0 +1,16 @@
+document.getElementById('loan-form').addEventListener('submit', function(event) {
+ event.preventDefault();
+
+ const amount = parseFloat(document.getElementById('amount').value);
+ const duration = parseFloat(document.getElementById('duration').value);
+ const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100;
+
+ const monthlyInterestRate = interestRate / 12;
+ const monthlyPayment = (amount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, duration)) / (Math.pow(1 + monthlyInterestRate, duration) - 1);
+ const totalPayment = monthlyPayment * duration;
+ const totalInterest = totalPayment - amount;
+
+ document.getElementById('monthly-payment').textContent = monthlyPayment.toFixed(2);
+ document.getElementById('total-payment').textContent = totalPayment.toFixed(2);
+ document.getElementById('total-interest').textContent = totalInterest.toFixed(2);
+});
